@@ -12,13 +12,14 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var clock_1 = require('./clock');
 var tick_1 = require('./tick');
+var hand_1 = require('./hand');
 var App = (function () {
     function App() {
     }
     App = __decorate([
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule],
-            declarations: [clock_1.Clock, tick_1.Tick],
+            declarations: [clock_1.Clock, tick_1.Tick, hand_1.Hand],
             bootstrap: [clock_1.Clock]
         }), 
         __metadata('design:paramtypes', [])

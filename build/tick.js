@@ -11,18 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var Tick = (function () {
     function Tick() {
+        this.width = 12;
     }
-    Tick.prototype.ngOnInit = function () {
-        console.log(this.left);
-    };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', String)
-    ], Tick.prototype, "left", void 0);
+        __metadata('design:type', Object)
+    ], Tick.prototype, "pos", void 0);
     Tick = __decorate([
         core_1.Component({
             selector: 'tick',
-            template: "\n\t\t<div [style.margin-left]=\"left\" class=\"tick\">\n\t\t</div>\n\t"
+            template: "\n\t\t<div [style.width]=\"width\" [style.height]=\"width\" [style.left]=\"pos.left - width / 2\" [style.top]=\"pos.top - width / 2\" class=\"tick\">\n\t\t</div>\n\t"
         }), 
         __metadata('design:paramtypes', [])
     ], Tick);
