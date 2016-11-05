@@ -9,22 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+;
 var Tick = (function () {
     function Tick() {
-        this.width = 12;
+        this.width = 28;
     }
+    Tick.prototype.ngOnInit = function () {
+        this.clickStyle = {
+            width: this.width * 2,
+            height: this.width * 2,
+            left: this.pos.left - this.width,
+            top: this.pos.top - this.width
+        };
+        this.tickStyle = {
+            width: this.width,
+            height: this.width,
+            left: this.width / 2,
+            top: this.width / 2,
+            lineHeight: this.width + 'px'
+        };
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
     ], Tick.prototype, "pos", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], Tick.prototype, "tick", void 0);
     Tick = __decorate([
         core_1.Component({
             selector: 'tick',
-            template: "\n\t\t<div [style.width]=\"width\" [style.height]=\"width\" [style.left]=\"pos.left - width / 2\" [style.top]=\"pos.top - width / 2\" class=\"tick\">\n\t\t</div>\n\t"
+            template: "\n    <div [ngStyle]=\"clickStyle\" class=\"clickZone\">\n      <div [ngStyle]=\"tickStyle\" [style.background-color]=\"tick.selected ? 'red' : 'transparent'\" class=\"tick\">\n        <span class=\"tickText\">{{tick.value}}</span>\n      </div>\n    </div>\n\t"
         }), 
         __metadata('design:paramtypes', [])
     ], Tick);
     return Tick;
 }());
 exports.Tick = Tick;
+;
 //# sourceMappingURL=tick.js.map
