@@ -13,8 +13,8 @@ var settings_1 = require('./settings');
 var Clock = (function () {
     function Clock() {
         var _this = this;
-        this.width = 201;
-        this.height = 201;
+        this.width = 191;
+        this.height = 191;
         this.tickNum = 12;
         this.handAngle = 0;
         this.selectMode = settings_1.selectModes.HOURS;
@@ -24,7 +24,7 @@ var Clock = (function () {
             _a.tod = settings_1.AM,
             _a
         );
-        this.ticks = Array(this.tickNum).fill(this.tickNum).map(function (num, i) { return ({ index: i, value: _this.getTickValue(i) }); });
+        this.ticks = Array(this.tickNum).fill(this.tickNum).map(function (num, i) { return ({ selected: !i, index: i, value: _this.getTickValue(i) }); });
         var _a;
     }
     Clock.prototype.getTickValue = function (i) {
@@ -39,6 +39,10 @@ var Clock = (function () {
             return (maxValue / this.tickNum) * i;
         }
     };
+    Clock.prototype.switchTod = function (tod) {
+        console.log(this.time);
+        this.time.tod = tod;
+    };
     Clock.prototype.switchMode = function (mode) {
         var _this = this;
         this.selectMode = mode;
@@ -46,7 +50,6 @@ var Clock = (function () {
     };
     Clock.prototype.setTime = function (tick) {
         this.time[this.selectMode] = String(tick.value);
-        console.log(this.time);
     };
     Clock.prototype.tickClick = function (tick, i) {
         this.ticks.forEach(function (tickItem) { return tickItem.selected = tickItem.index === i; });
@@ -67,7 +70,7 @@ var Clock = (function () {
     Clock = __decorate([
         core_1.Component({
             selector: 'clock',
-            template: "\n    <div class=\"TimePicker\">\n      <display [onModeChange]=\"switchMode.bind(this)\" [mode]=\"selectMode\" [time]=\"time\"></display>\n      <div [style.height]=\"height + 'px'\" [style.width]=\"width + 'px'\" class=\"clockFace\">\n        <hand [angle]=\"handAngle\" [pos]=\"{x: width / 2}\" [length]=\"height\"></hand>\n        <tick (click)=\"tickClick(tick, i)\" [pos]=\"getTickPos(tick, i)\" [tick]=\"tick\" *ngFor=\"let tick of ticks; let i = index;\"></tick>\t\n      </div>\n    </div>\n\t"
+            template: "\n    <div class=\"TimePicker\">\n      <display [onTodChange]=\"switchTod.bind(this)\" [onModeChange]=\"switchMode.bind(this)\" [mode]=\"selectMode\" [time]=\"time\"></display>\n      <div [style.height]=\"height + 'px'\" [style.width]=\"width + 'px'\" class=\"clockFace\">\n        <hand [angle]=\"handAngle\" [pos]=\"{x: width / 2}\" [length]=\"height\"></hand>\n        <tick (click)=\"tickClick(tick, i)\" [pos]=\"getTickPos(tick, i)\" [tick]=\"tick\" *ngFor=\"let tick of ticks; let i = index;\"></tick>\t\n      </div>\n      <div class=\"clockButtons\">\n        <span class=\"cancel clockButton\">CANCEL</span>\n        <span class=\"ok clockButton\">OK</span>\n      </div>\n    </div>\n\t"
         }), 
         __metadata('design:paramtypes', [])
     ], Clock);

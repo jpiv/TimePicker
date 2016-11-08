@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "tsc -w",
-    "lite": "lite-server",
+    "lite": "lite-server -c lite-config.json",
     "tsc": "tsc",
     "tsc:w": "tsc -w"
   },

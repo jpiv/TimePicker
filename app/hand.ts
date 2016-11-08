@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
 		<div [style.transform]="'rotate(' + angle + 'deg)'" 
       [style.left]="pos.x - (thickness / 2)" [style.height]="length" [style.width]="thickness" class="hand">
       <hr [style.height]="length / 2" />
+      <div class="circle"></div>
 		</div>
 	`
 })
@@ -15,7 +16,7 @@ export class Hand {
   @Input() pos: Object;
   @Input() length: number;
 
-  thickness: number = 5;
+  thickness: number = 2;
 
 	constructor() {
 	}

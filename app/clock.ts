@@ -2,35 +2,43 @@ import { Component } from '@angular/core';
 import { TickItem } from './tick';
 import { selectModes, AM } from './settings';
 
+export interface Time {
+  [propName: string]: string;
+  tod: string;
+}
 
 @Component({
 	selector: 'clock',
 	template: `
     <div class="TimePicker">
-      <display [onModeChange]="switchMode.bind(this)" [mode]="selectMode" [time]="time"></display>
+      <display [onTodChange]="switchTod.bind(this)" [onModeChange]="switchMode.bind(this)" [mode]="selectMode" [time]="time"></display>
       <div [style.height]="height + 'px'" [style.width]="width + 'px'" class="clockFace">
         <hand [angle]="handAngle" [pos]="{x: width / 2}" [length]="height"></hand>
         <tick (click)="tickClick(tick, i)" [pos]="getTickPos(tick, i)" [tick]="tick" *ngFor="let tick of ticks; let i = index;"></tick>	
+      </div>
+      <div class="clockButtons">
+        <span class="cancel clockButton">CANCEL</span>
+        <span class="ok clockButton">OK</span>
       </div>
     </div>
 	`
 })
 export class Clock {
-  width: number = 201;
-  height: number = 201;
+  width: number = 191;
+  height: number = 191;
 	tickNum: number = 12;
   handAngle: number = 0;
 	ticks: TickItem[];
 
   selectMode: string = selectModes.HOURS;
-  time: Object = {
+  time: Time = {
     [selectModes.HOURS]: '0',
     [selectModes.MINS]: '0',
     tod: AM
   };
 	
 	constructor() {
-		this.ticks = Array(this.tickNum).fill(this.tickNum).map((num, i) => ({ index: i, value: this.getTickValue(i) }));
+		this.ticks = Array(this.tickNum).fill(this.tickNum).map((num, i) => ({ selected: !i,  index: i, value: this.getTickValue(i) }));
 	}
 
   getTickValue(i) {
@@ -44,6 +52,11 @@ export class Clock {
     }
   }
 
+  switchTod(tod) {
+    console.log(this.time)
+    this.time.tod = tod;
+  }
+
   switchMode(mode) {
     this.selectMode = mode;
     this.ticks.forEach((tick, i) => tick.value = this.getTickValue(i));
@@ -51,7 +64,6 @@ export class Clock {
 
   setTime(tick) {
     this.time[this.selectMode] = String(tick.value);
-    console.log(this.time);
   }
 
   tickClick(tick, i) {
