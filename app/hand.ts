@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
 		<div [style.transform]="'rotate(' + angle + 'deg)'" 
       [style.left]="pos.x - (thickness / 2)" [style.height]="length" [style.width]="thickness" class="hand">
       <hr [style.height]="length / 2" />
-      <div class="circle"></div>
 		</div>
+    <div [style.left]="pos.x - (thickness * 1.5)" [style.top]="pos.y - (thickness * 1.5)" [style.height]="thickness * 3" [style.width]="thickness * 3" class="center"></div>
 	`
 })
 

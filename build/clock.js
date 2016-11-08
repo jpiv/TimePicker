@@ -70,7 +70,7 @@ var Clock = (function () {
     Clock = __decorate([
         core_1.Component({
             selector: 'clock',
-            template: "\n    <div class=\"TimePicker\">\n      <display [onTodChange]=\"switchTod.bind(this)\" [onModeChange]=\"switchMode.bind(this)\" [mode]=\"selectMode\" [time]=\"time\"></display>\n      <div [style.height]=\"height + 'px'\" [style.width]=\"width + 'px'\" class=\"clockFace\">\n        <hand [angle]=\"handAngle\" [pos]=\"{x: width / 2}\" [length]=\"height\"></hand>\n        <tick (click)=\"tickClick(tick, i)\" [pos]=\"getTickPos(tick, i)\" [tick]=\"tick\" *ngFor=\"let tick of ticks; let i = index;\"></tick>\t\n      </div>\n      <div class=\"clockButtons\">\n        <span class=\"cancel clockButton\">CANCEL</span>\n        <span class=\"ok clockButton\">OK</span>\n      </div>\n    </div>\n\t"
+            template: "\n    <div class=\"TimePicker\">\n      <display [onTodChange]=\"switchTod.bind(this)\" [onModeChange]=\"switchMode.bind(this)\" [mode]=\"selectMode\" [time]=\"time\"></display>\n      <div [style.height]=\"height + 'px'\" [style.width]=\"width + 'px'\" class=\"clockFace\">\n        <hand [angle]=\"handAngle\" [pos]=\"{x: width / 2, y: height / 2}\" [length]=\"height\"></hand>\n        <tick (click)=\"tickClick(tick, i)\" [pos]=\"getTickPos(tick, i)\" [tick]=\"tick\" *ngFor=\"let tick of ticks; let i = index;\"></tick>\t\n      </div>\n      <div class=\"clockButtons\">\n        <span class=\"cancel clockButton\">CANCEL</span>\n        <span class=\"ok clockButton\">OK</span>\n      </div>\n    </div>\n\t"
         }), 
         __metadata('design:paramtypes', [])
     ], Clock);
